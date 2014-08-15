@@ -1,0 +1,358 @@
+Path: g2news1.google.com!news1.google.com!news3.google.com!news.glorb.com!news2.euro.net!newsfeed.vmunix.org!newsfeed.cw.net!cw.net!news-FFM2.ecrc.de!news0.de.colt.net!news-fra1.dfn.de!kanaga.switch.ch!ezmp3.switch.ch!news-zh.switch.ch!switch.ch!cernne03.cern.ch!cern.ch!news
+From: Laurent Deniau <laurent...@cern.ch>
+Newsgroups: comp.std.c
+Subject: __VA_NARG__
+Date: Mon, 16 Jan 2006 18:43:40 +0100
+Organization: CERN - European Laboratory for Particle Physics
+Lines: 39
+Message-ID: <dqgm2f$ije$1@sunnews.cern.ch>
+NNTP-Posting-Host: pb-d-128-141-34-253.cern.ch
+Mime-Version: 1.0
+Content-Type: text/plain; charset=us-ascii; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Trace: sunnews.cern.ch 1137433487 19054 (None) 128.141.34.253
+X-Complaints-To: ne...@sunnews.cern.ch
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.7.12) Gecko/20051007 Debian/1.7.12-1
+X-Accept-Language: en
+Xref: g2news1.google.com comp.std.c:1121
+
+Hi all,
+
+A year ago, I was asking here for an equivalent of __VA_NARG__ which 
+would return the number of arguments contained in __VA_ARGS__ before its 
+expansion. In fact my problem at that time (detecting for a third 
+argument) was solved by the solution of P. Mensonides. But I was still 
+thinking that the standard should have provided such a facilities rather 
+easy to compute for cpp.
+
+This morning I had to face again the same problem, that is knowing the 
+number of arguments contained in __VA_ARGS__ before its expansion (after 
+its expansion can always be achieved if you can do it before). I found a 
+simple non-iterative solution which may be of interest here as an answer 
+to who will ask in the future for a kind of __VA_NARG__ in the standard 
+and I post it for archiving. May be some more elegant-efficient solution 
+exists?
+
+regards,
+
+ld.
+
+
+Returns NARG, the number of arguments contained in __VA_ARGS__ before 
+expansion as far as NARG is >0 and <64 (cpp limits):
+
+#define PP_NARG( ...) PP_NARG_(__VA_ARGS__,PP_RSEQ_N())
+#define PP_NARG_(...) PP_ARG_N(__VA_ARGS__)
+#define PP_ARG_N(_1,_2,_3,_4,_5,_6,_7,_8,_9,[..],_61,_62,_63,N,...) N
+#define PP_RSEQ_N() 63,62,61,60,[..],9,8,7,6,5,4,3,2,1,0
+
+[..] stands for the continuation of the sequence omitted here for 
+lisibility.
+
+PP_NARG(A) -> 1
+PP_NARG(A,B) -> 2
+PP_NARG(A,B,C) -> 3
+PP_NARG(A,B,C,D) -> 4
+PP_NARG(A,B,C,D,E) -> 5
+PP_NARG(A1,A2,[..],A62,A63) -> 63
+
+
+Path: g2news1.google.com!news1.google.com!proxad.net!news.tele.dk!news.tele.dk!small.news.tele.dk!news-fra1.dfn.de!news-ham1.dfn.de!news.uni-hamburg.de!not-for-mail
+From: Roland Illig <roland...@gmx.de>
+Newsgroups: comp.std.c
+Subject: Re: __VA_NARG__
+Date: Fri, 20 Jan 2006 12:58:41 +0100
+Organization: University of Hamburg -- Germany
+Lines: 53
+Message-ID: <dqqj9j$31l$1@rzsun03.rrz.uni-hamburg.de>
+References: <dqgm2f$ije$1@sunnews.cern.ch>
+NNTP-Posting-Host: rzdspc3.informatik.uni-hamburg.de
+Mime-Version: 1.0
+Content-Type: text/plain; charset=us-ascii; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Trace: rzsun03.rrz.uni-hamburg.de 1137758323 3125 134.100.9.63 (20 Jan 2006 11:58:43 GMT)
+X-Complaints-To: use...@news.uni-hamburg.de
+NNTP-Posting-Date: 20 Jan 2006 11:58:43 GMT
+User-Agent: Mozilla/5.0 (X11; U; NetBSD i386; en-US; rv:1.7.12) Gecko/20051220
+X-Accept-Language: de-de, de, en-us, en
+In-Reply-To: <dqgm2f$ije$1@sunnews.cern.ch>
+Xref: g2news1.google.com comp.std.c:1146
+
+Laurent Deniau wrote:
+> This morning I had to face again the same problem, that is knowing the 
+> number of arguments contained in __VA_ARGS__ before its expansion (after 
+> its expansion can always be achieved if you can do it before). I found a 
+> simple non-iterative solution which may be of interest here as an answer 
+> to who will ask in the future for a kind of __VA_NARG__ in the standard 
+> and I post it for archiving. May be some more elegant-efficient solution 
+> exists?
+
+Thanks for this idea. I really like it.
+
+For those that only want to copy and paste it, here is the expanded version:
+
+/* The PP_NARG macro returns the number of arguments that have been
+  * passed to it.
+  */
+
+#define PP_NARG(...) \
+         PP_NARG_(__VA_ARGS__,PP_RSEQ_N())
+#define PP_NARG_(...) \
+         PP_ARG_N(__VA_ARGS__)
+#define PP_ARG_N( \
+          _1, _2, _3, _4, _5, _6, _7, _8, _9,_10, \
+         _11,_12,_13,_14,_15,_16,_17,_18,_19,_20, \
+         _21,_22,_23,_24,_25,_26,_27,_28,_29,_30, \
+         _31,_32,_33,_34,_35,_36,_37,_38,_39,_40, \
+         _41,_42,_43,_44,_45,_46,_47,_48,_49,_50, \
+         _51,_52,_53,_54,_55,_56,_57,_58,_59,_60, \
+         _61,_62,_63,N,...) N
+#define PP_RSEQ_N() \
+         63,62,61,60,                   \
+         59,58,57,56,55,54,53,52,51,50, \
+         49,48,47,46,45,44,43,42,41,40, \
+         39,38,37,36,35,34,33,32,31,30, \
+         29,28,27,26,25,24,23,22,21,20, \
+         19,18,17,16,15,14,13,12,11,10, \
+         9,8,7,6,5,4,3,2,1,0
+
+/* Some test cases */
+PP_NARG(A) -> 1
+PP_NARG(A,B) -> 2
+PP_NARG(A,B,C) -> 3
+PP_NARG(A,B,C,D) -> 4
+PP_NARG(A,B,C,D,E) -> 5
+PP_NARG(1,2,3,4,5,6,7,8,9,0,
+         1,2,3,4,5,6,7,8,9,0,
+         1,2,3,4,5,6,7,8,9,0,
+         1,2,3,4,5,6,7,8,9,0,
+         1,2,3,4,5,6,7,8,9,0,
+         1,2,3,4,5,6,7,8,9,0,
+         1,2,3) -> 63
+
+Note: using PP_NARG() without arguments would violate 6.10.3p4 of ISO C99.
+
+
+Path: g2news1.google.com!news4.google.com!news.glorb.com!newsfeed00.sul.t-online.de!t-online.de!130.59.10.21.MISMATCH!kanaga.switch.ch!ezmp3.switch.ch!news-zh.switch.ch!switch.ch!cernne03.cern.ch!cern.ch!news
+From: Laurent Deniau <laurent...@cern.ch>
+Newsgroups: comp.std.c
+Subject: Re: __VA_NARG__
+Date: Fri, 20 Jan 2006 13:16:24 +0100
+Organization: CERN - European Laboratory for Particle Physics
+Lines: 64
+Message-ID: <dqqkcp$fk1$1@sunnews.cern.ch>
+References: <dqgm2f$ije$1@sunnews.cern.ch> <dqqj9j$31l$1@rzsun03.rrz.uni-hamburg.de>
+NNTP-Posting-Host: pb-d-128-141-34-204.cern.ch
+Mime-Version: 1.0
+Content-Type: text/plain; charset=us-ascii; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Trace: sunnews.cern.ch 1137759449 16001 (None) 128.141.34.204
+X-Complaints-To: ne...@sunnews.cern.ch
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.7.12) Gecko/20051007 Debian/1.7.12-1
+X-Accept-Language: en
+In-Reply-To: <dqqj9j$31l$1@rzsun03.rrz.uni-hamburg.de>
+Xref: g2news1.google.com comp.std.c:1147
+
+Roland Illig wrote:
+> Laurent Deniau wrote:
+> 
+>> This morning I had to face again the same problem, that is knowing the 
+>> number of arguments contained in __VA_ARGS__ before its expansion 
+>> (after its expansion can always be achieved if you can do it before). 
+>> I found a simple non-iterative solution which may be of interest here 
+>> as an answer to who will ask in the future for a kind of __VA_NARG__ 
+>> in the standard and I post it for archiving. May be some more 
+>> elegant-efficient solution exists?
+> 
+> 
+> Thanks for this idea. I really like it.
+> 
+> For those that only want to copy and paste it, here is the expanded 
+> version:
+> 
+> /* The PP_NARG macro returns the number of arguments that have been
+>  * passed to it.
+>  */
+> 
+> #define PP_NARG(...) \
+>         PP_NARG_(__VA_ARGS__,PP_RSEQ_N())
+> #define PP_NARG_(...) \
+>         PP_ARG_N(__VA_ARGS__)
+> #define PP_ARG_N( \
+>          _1, _2, _3, _4, _5, _6, _7, _8, _9,_10, \
+>         _11,_12,_13,_14,_15,_16,_17,_18,_19,_20, \
+>         _21,_22,_23,_24,_25,_26,_27,_28,_29,_30, \
+>         _31,_32,_33,_34,_35,_36,_37,_38,_39,_40, \
+>         _41,_42,_43,_44,_45,_46,_47,_48,_49,_50, \
+>         _51,_52,_53,_54,_55,_56,_57,_58,_59,_60, \
+>         _61,_62,_63,N,...) N
+> #define PP_RSEQ_N() \
+>         63,62,61,60,                   \
+>         59,58,57,56,55,54,53,52,51,50, \
+>         49,48,47,46,45,44,43,42,41,40, \
+>         39,38,37,36,35,34,33,32,31,30, \
+>         29,28,27,26,25,24,23,22,21,20, \
+>         19,18,17,16,15,14,13,12,11,10, \
+>         9,8,7,6,5,4,3,2,1,0
+> 
+> /* Some test cases */
+> PP_NARG(A) -> 1
+> PP_NARG(A,B) -> 2
+> PP_NARG(A,B,C) -> 3
+> PP_NARG(A,B,C,D) -> 4
+> PP_NARG(A,B,C,D,E) -> 5
+> PP_NARG(1,2,3,4,5,6,7,8,9,0,
+>         1,2,3,4,5,6,7,8,9,0,
+>         1,2,3,4,5,6,7,8,9,0,
+>         1,2,3,4,5,6,7,8,9,0,
+>         1,2,3,4,5,6,7,8,9,0,
+>         1,2,3,4,5,6,7,8,9,0,
+>         1,2,3) -> 63
+> 
+> Note: using PP_NARG() without arguments would violate 6.10.3p4 of ISO C99.
+
+Right. I try to ensure that I always have at least one argument in my 
+macros which are expected to accept arguments (like for variadic functions).
+
+Thanks for the pretty expanded version.
+
+ld.
+
+
+Received: by 10.68.211.136 with SMTP id nc8mr498283pbc.6.1335094289119;
+        Sun, 22 Apr 2012 04:31:29 -0700 (PDT)
+Path: r9ni85324pbh.0!nntp.google.com!news1.google.com!postnews.google.com!glegroupsg2000goo.googlegroups.com!not-for-mail
+From: arpad.g...@gmail.com
+Newsgroups: comp.std.c
+Subject: Re: __VA_NARG__
+Date: Sun, 22 Apr 2012 04:31:28 -0700 (PDT)
+Organization: http://groups.google.com
+Lines: 75
+Message-ID: <23410423.357.1335094288749.JavaMail.geo-discussion-forums@ynbv36>
+References: <dqgm2f$ije$1@sunnews.cern.ch>
+NNTP-Posting-Host: 178.48.71.7
+Mime-Version: 1.0
+X-Trace: posting.google.com 1335094289 11907 127.0.0.1 (22 Apr 2012 11:31:29 GMT)
+X-Complaints-To: groups...@google.com
+NNTP-Posting-Date: Sun, 22 Apr 2012 11:31:29 +0000 (UTC)
+In-Reply-To: <dqgm2f$ije$1@sunnews.cern.ch>
+Complaints-To: groups...@google.com
+Injection-Info: glegroupsg2000goo.googlegroups.com; posting-host=178.48.71.7; posting-account=s3bX8goAAADykh5tnw0EN0ZoghWARt3z
+User-Agent: G2/1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+
+2006. janu=C3=A1r 16., h=C3=A9tf=C5=91 18:43:40 UTC+1 id=C5=91pontban Laure=
+nt Deniau a k=C3=B6vetkez=C5=91t =C3=ADrta:
+> Hi all,
+>=20
+> A year ago, I was asking here for an equivalent of __VA_NARG__ which=20
+> would return the number of arguments contained in __VA_ARGS__ before its=
+=20
+> expansion. In fact my problem at that time (detecting for a third=20
+> argument) was solved by the solution of P. Mensonides. But I was still=20
+> thinking that the standard should have provided such a facilities rather=
+=20
+> easy to compute for cpp.
+>=20
+> This morning I had to face again the same problem, that is knowing the=20
+> number of arguments contained in __VA_ARGS__ before its expansion (after=
+=20
+> its expansion can always be achieved if you can do it before). I found a=
+=20
+> simple non-iterative solution which may be of interest here as an answer=
+=20
+> to who will ask in the future for a kind of __VA_NARG__ in the standard=
+=20
+> and I post it for archiving. May be some more elegant-efficient solution=
+=20
+> exists?
+>=20
+> regards,
+>=20
+> ld.
+>=20
+>=20
+> Returns NARG, the number of arguments contained in __VA_ARGS__ before=20
+> expansion as far as NARG is >0 and <64 (cpp limits):
+>=20
+> #define PP_NARG( ...) PP_NARG_(__VA_ARGS__,PP_RSEQ_N())
+> #define PP_NARG_(...) PP_ARG_N(__VA_ARGS__)
+> #define PP_ARG_N(_1,_2,_3,_4,_5,_6,_7,_8,_9,[..],_61,_62,_63,N,...) N
+> #define PP_RSEQ_N() 63,62,61,60,[..],9,8,7,6,5,4,3,2,1,0
+>=20
+> [..] stands for the continuation of the sequence omitted here for=20
+> lisibility.
+>=20
+> PP_NARG(A) -> 1
+> PP_NARG(A,B) -> 2
+> PP_NARG(A,B,C) -> 3
+> PP_NARG(A,B,C,D) -> 4
+> PP_NARG(A,B,C,D,E) -> 5
+> PP_NARG(A1,A2,[..],A62,A63) -> 63
+
+I extended this to also work correctly with 0 arguments (but now it will ac=
+cept only 62 arguments):
+
+
+#define __VA_NARG__(...) \
+=09(__VA_NARG_(_0, ## __VA_ARGS__, __RSEQ_N()) - 1)
+#define __VA_NARG_(...) \
+=09__VA_ARG_N(__VA_ARGS__)
+#define __VA_ARG_N( \
+=09 _1, _2, _3, _4, _5, _6, _7, _8, _9,_10, \
+=09_11,_12,_13,_14,_15,_16,_17,_18,_19,_20, \
+=09_21,_22,_23,_24,_25,_26,_27,_28,_29,_30, \
+=09_31,_32,_33,_34,_35,_36,_37,_38,_39,_40, \
+=09_41,_42,_43,_44,_45,_46,_47,_48,_49,_50, \
+=09_51,_52,_53,_54,_55,_56,_57,_58,_59,_60, \
+=09_61,_62,_63,N,...) N
+#define __RSEQ_N() \
+=0963, 62, 61, 60,                         \
+=0959, 58, 57, 56, 55, 54, 53, 52, 51, 50, \
+=0949, 48, 47, 46, 45, 44, 43, 42, 41, 40, \
+=0939, 38, 37, 36, 35, 34, 33, 32, 31, 30, \
+=0929, 28, 27, 26, 25, 24, 23, 22, 21, 20, \
+=0919, 18, 17, 16, 15, 14, 13, 12, 11, 10, \
+=09 9,  8,  7,  6,  5,  4,  3,  2,  1,  0
+
+Hope this helps.
+
+
+Received: by 10.68.129.169 with SMTP id nx9mr11342325pbb.2.1335111054227;
+        Sun, 22 Apr 2012 09:10:54 -0700 (PDT)
+Path: r9ni86043pbh.0!nntp.google.com!news1.google.com!goblin2!goblin1!goblin.stu.neva.ru!news.osn.de!diablo2.news.osn.de!proxad.net!feeder2-2.proxad.net!cleanfeed4-a.proxad.net!nnrp4-2.free.fr!not-for-mail
+Message-ID: <4F942D8D.7020203@loria.fr>
+Date: Sun, 22 Apr 2012 18:10:53 +0200
+From: Jens Gustedt <jens.g...@loria.fr>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; de; rv:1.9.2.28) Gecko/20120313 Lightning/1.0b2 Thunderbird/3.1.20
+MIME-Version: 1.0
+Newsgroups: comp.std.c
+Subject: Re: __VA_NARG__
+References: <dqgm2f$ije$1@sunnews.cern.ch> <23410423.357.1335094288749.JavaMail.geo-discussion-forums@ynbv36>
+In-Reply-To: <23410423.357.1335094288749.JavaMail.geo-discussion-forums@ynbv36>
+Lines: 16
+Organization: Guest of ProXad - France
+NNTP-Posting-Date: 22 Apr 2012 18:10:53 CEST
+NNTP-Posting-Host: 81.56.96.245
+X-Trace: 1335111053 news-1.free.fr 6629 81.56.96.245:45178
+X-Complaints-To: ab...@proxad.net
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+Hello,
+it seems that you are using the ``, ##'' extension of gcc to achieve
+your goal. This is not standard, and so in particular this news group
+is probably not appropriate.
+
+There are other, more standard ways around this problem of detecting
+if a va_arg macro is called with an empty argument. Unfortunately none
+of them is completely error prone, but at least some are usably in
+practise.
+
+In that sense it would be really nice, I agree, if there would be a
+standard functionality to achieve that goal. For the moment the
+preprocessing phase doesn't foresee much of "meta" functions. So this
+would be a substatial change of the pattern, not likely to happen.
+
+Jens

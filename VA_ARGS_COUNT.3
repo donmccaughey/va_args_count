@@ -1,0 +1,24 @@
+.\"Modified from man(1) of FreeBSD, the NetBSD mdoc.template, and mdoc.samples.
+.\"See Also:
+.\"man mdoc.samples for a complete listing of options
+.\"man mdoc for the short list of editing options
+.\"/usr/share/misc/mdoc.template
+.Dd 15 August 2014
+.Dt VA_ARGS_COUNT 3
+.Os Darwin
+.Sh NAME
+.Nm VA_ARGS_COUNT
+.Nd count the number of arguments in 
+.Dv __VA_ARGS__
+.Sh SYNOPSIS
+.Fd #include <va_args_count.h>
+.Fn VA_ARGS_COUNT(...)
+.Sh DESCRIPTION
+A C macro to find the number of arguments in the C99 `__VA_ARGS__` macro.
+.Pp
+See
+.Lk https://groups.google.com/d/topic/comp.std.c/d-6Mj5Lko_s/discussion .
+.Sh EXAMPLE
+Example
+.Sh SEE ALSO 
+.Xr Autoindigestion 5

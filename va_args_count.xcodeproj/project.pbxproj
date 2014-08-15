@@ -6,14 +6,56 @@
 	objectVersion = 46;
 	objects = {
 
+/* Begin PBXFileReference section */
+		D4A662F31941444D0054F383 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		D4A662F41941444D0054F383 /* va_args_count.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = va_args_count.h; sourceTree = "<group>"; };
+		D4A662F5194144F00054F383 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		D4A6630019414B350054F383 /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
+		D4A6630119414B350054F383 /* Makefile */ = {isa = PBXFileReference; explicitFileType = sourcecode.make; indentWidth = 4; path = Makefile; sourceTree = "<group>"; tabWidth = 4; usesTabs = 1; };
+		D4E202A3199E786E00A68962 /* comp.std.c-__VA_NARG__.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "comp.std.c-__VA_NARG__.txt"; sourceTree = "<group>"; };
+		D4E202A4199E9C6900A68962 /* VA_ARGS_COUNT.3 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = VA_ARGS_COUNT.3; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
 /* Begin PBXGroup section */
 		D4A662EC1941442D0054F383 = {
 			isa = PBXGroup;
 			children = (
+				D4E202A3199E786E00A68962 /* comp.std.c-__VA_NARG__.txt */,
+				D4A662F31941444D0054F383 /* LICENSE */,
+				D4A662F5194144F00054F383 /* README.md */,
+				D4A662F41941444D0054F383 /* va_args_count.h */,
+				D4E202A4199E9C6900A68962 /* VA_ARGS_COUNT.3 */,
+				D4A662FF19414B350054F383 /* test */,
 			);
 			sourceTree = "<group>";
 		};
+		D4A662FF19414B350054F383 /* test */ = {
+			isa = PBXGroup;
+			children = (
+				D4A6630119414B350054F383 /* Makefile */,
+				D4A6630019414B350054F383 /* main.c */,
+			);
+			path = test;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
+
+/* Begin PBXLegacyTarget section */
+		D4A6630219414BA60054F383 /* test */ = {
+			isa = PBXLegacyTarget;
+			buildArgumentsString = "$(ACTION)";
+			buildConfigurationList = D4A6630319414BA60054F383 /* Build configuration list for PBXLegacyTarget "test" */;
+			buildPhases = (
+			);
+			buildToolPath = /usr/bin/make;
+			buildWorkingDirectory = "$(SRCROOT)/test";
+			dependencies = (
+			);
+			name = test;
+			passBuildSettingsInEnvironment = 1;
+			productName = test;
+		};
+/* End PBXLegacyTarget section */
 
 /* Begin PBXProject section */
 		D4A662ED1941442D0054F383 /* Project object */ = {
@@ -32,6 +74,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
+				D4A6630219414BA60054F383 /* test */,
 			);
 		};
 /* End PBXProject section */
@@ -49,6 +92,84 @@
 			};
 			name = Release;
 		};
+		D4A6630419414BA60054F383 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUGGING_SYMBOLS = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		D4A6630519414BA60054F383 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -57,6 +178,15 @@
 			buildConfigurations = (
 				D4A662F11941442D0054F383 /* Debug */,
 				D4A662F21941442D0054F383 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D4A6630319414BA60054F383 /* Build configuration list for PBXLegacyTarget "test" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D4A6630419414BA60054F383 /* Debug */,
+				D4A6630519414BA60054F383 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
