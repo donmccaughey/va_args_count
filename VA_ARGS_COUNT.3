@@ -12,13 +12,40 @@
 .Dv __VA_ARGS__
 .Sh SYNOPSIS
 .Fd #include <va_args_count.h>
-.Fn VA_ARGS_COUNT(...)
+.Fn VA_ARGS_COUNT "..."
 .Sh DESCRIPTION
-A C macro to find the number of arguments in the C99 `__VA_ARGS__` macro.
+A macro that counts the number of arguments in the  
+.Dv __VA_ARGS__
+macro. The macro returns the count as an
+.Ft int .
+Arguments may be passed to 
+.Fn VA_ARGS_COUNT
+directly or by using
+.Dv __VA_ARGS__
+as part of another macro.
 .Pp
-See
-.Lk https://groups.google.com/d/topic/comp.std.c/d-6Mj5Lko_s/discussion .
+Based on the
+.Dq __VA_NARG__
+thread in the 
+.Li comp.std.c
+newsgroup started by Laurent Deniau.
 .Sh EXAMPLE
-Example
-.Sh SEE ALSO 
-.Xr Autoindigestion 5
+A wrapper macro for a function that takes an array and count of items:
+.Bd -literal -offset indent
+// function with array and count parameters
+void print_int_array(int *array, int count);
+
+#define PRINT_INTS(...) \\
+    print_int_array( \\
+        (int[]) { __VA_ARGS__ }, \\
+        VA_ARGS_COUNT(__VA_ARGS__) \\
+    )
+
+// print 3 ints
+PRINT_INTS(100, 98, 93);
+
+.Ed
+.Sh SEE ALSO
+.Lk https://groups.google.com/d/topic/comp.std.c/d-6Mj5Lko_s/discussion "__VA_NARG__ thread on comp.std.c"
+.Lk https://gcc.gnu.org/onlinedocs/cpp/Variadic-Macros.html "GCC Preprocessor Manual on variadic macros"
+.Lk http://en.wikipedia.org/wiki/Variadic_macro "Wikipedia article about variadic macros"
