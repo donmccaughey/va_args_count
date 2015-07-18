@@ -1,4 +1,4 @@
-VA\_ARGS\_COUNT
+va_args_count
 =============
 
 A C macro to find the number of arguments in the C99 `__VA_ARGS__` macro.
@@ -11,6 +11,7 @@ Used directly, the `VA_ARGS_COUNT()` macro returns the number of arguments
 passed to it as an `int`.
 
     printf("There are %i arguments.\n", VA_ARGS_COUNT(1, "two", 3.0));
+
 
 ### Counting Function Arguments
 
@@ -40,6 +41,7 @@ Now the compiler does the counting for you:
 
     // print 3 strings
     PRINT_STRINGS("one", "two", "three");
+
 
 ### Counting Array Items
 

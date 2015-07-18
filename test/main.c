@@ -17,16 +17,16 @@ print_int_array(int *int_array, int count);
 int
 main(int argc, char *argv[])
 {
-  PRINT_INTS(1, 2, 3, 5, 8, 13);
-  return EXIT_SUCCESS;
+    PRINT_INTS(1, 2, 3, 5, 8, 13);
+    return EXIT_SUCCESS;
 }
 
 
 static void
 print_int_array(int *int_array, int count)
 {
-  printf("Printing %i integers:\n", count);
-  for (int i = 0; i < count; ++i) {
-    printf("\t%i\n", int_array[i]);
-  }
+    printf("Printing %i integers:\n", count);
+    for (int i = 0; i < count; ++i) {
+        printf("\t%i\n", int_array[i]);
+    }
 }
