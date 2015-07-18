@@ -1,9 +1,19 @@
-.PHONEY: clean
+products ?= tmp
 
 
-test: main.c ../va_args_count.h
+.PHONEY : check
+check : $(products)/test
+	$(products)/test
+
+
+.PHONEY : clean
+clean :
+	-rm $(products)/test
+
+
+$(products)/test : main.c ../va_args_count.h | $(products)
 	$(CC) $(CFLAGS) -I.. -o$@ $<
 
 
-clean:
-	-$(RM) test
+$(products) :
+	mkdir -p $@

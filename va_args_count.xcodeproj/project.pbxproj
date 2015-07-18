@@ -43,7 +43,7 @@
 /* Begin PBXLegacyTarget section */
 		D4A6630219414BA60054F383 /* test */ = {
 			isa = PBXLegacyTarget;
-			buildArgumentsString = "$(ACTION)";
+			buildArgumentsString = "products=\"$(BUILT_PRODUCTS_DIR)\" $(ACTION)";
 			buildConfigurationList = D4A6630319414BA60054F383 /* Build configuration list for PBXLegacyTarget "test" */;
 			buildPhases = (
 			);
